@@ -8,21 +8,21 @@ import java.util.List;
  */
 public interface Graph<T> {
 
-    void addEdge(int v, int w);
+    void addEdge(Edge<T> edge);
 
-    void addVertex(T x);
+    void addVertex(T vertex);
 
-    void removeVertex(int v);
+    void removeVertex(T vertex);
 
-    void removeEdge(int v, int w);
+    void removeEdge(Edge<T> edge);
 
-    boolean hasEdge(int v, int w);
+    boolean hasEdge(Edge<T> edge);
 
     int edgesAmount();
 
-    T getVertex(int v);
+    T getVertex(int index);
 
     int order();
 
-    List<Integer> getAdjList(int v);
+    List<Edge<T>> getAdjList(T vertex);
 }
