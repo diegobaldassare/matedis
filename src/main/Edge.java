@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Objects;
+
 /**
  * Author: brianfroschauer
  * Date: 30/10/2018
@@ -22,7 +24,16 @@ public class Edge<T> {
         return vertex2;
     }
 
-    public boolean equals(Edge<T> edge) {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Edge<?> edge = (Edge<?>) o;
         return !(!vertex1.equals(edge.vertex1) || !vertex1.equals(edge.vertex2));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(vertex1, vertex2);
     }
 }

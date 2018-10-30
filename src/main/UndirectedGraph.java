@@ -31,6 +31,7 @@ public class UndirectedGraph<T> implements Graph<T> {
 
     @Override
     public void removeVertex(T vertex) {
+        edges.removeAll(getAdjList(vertex));
         vertexes.remove(vertex);
     }
 
