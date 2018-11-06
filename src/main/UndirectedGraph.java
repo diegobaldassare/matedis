@@ -60,7 +60,7 @@ public class UndirectedGraph<T> implements Graph<T> {
 
     @Override
     public int order() {
-        return edges.size();
+        return vertexes.size();
     }
 
     @Override
