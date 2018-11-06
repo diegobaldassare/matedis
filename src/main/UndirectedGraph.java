@@ -72,4 +72,30 @@ public class UndirectedGraph<T> implements Graph<T> {
         });
         return adj;
     }
+
+    public int getVertexDegree(T vertex) {
+        return getAdjList(vertex).size();
+    }
+
+    public void print() {
+        if (vertexes.size() > 0) {
+            System.out.print("Vertexes: {");
+            for (int i = 0; i < vertexes.size()-1; i++) {
+                System.out.print(vertexes.get(i) + ", ");
+            }
+            System.out.print(vertexes.get(vertexes.size()-1) + "}");
+        } else {
+            System.out.println("Vertex is empty");
+        }
+
+        if (edges.size() > 0) {
+            System.out.print("\nEdges: {");
+            for (int i = 0; i < edges.size()-1; i++) {
+                System.out.print("(" + edges.get(i).getVertex1() + ", " + edges.get(i).getVertex2() + "), ");
+            }
+            System.out.print("(" + edges.get(edges.size()-1).getVertex1() + ", " + edges.get(edges.size()-1).getVertex2() + ")}");
+        } else {
+            System.out.println("\nEdges is empty");
+        }
+    }
 }

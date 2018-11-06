@@ -25,4 +25,6 @@ public interface Graph<T> {
     int order();
 
     List<Edge<T>> getAdjList(T vertex);
+
+    void print();
 }
