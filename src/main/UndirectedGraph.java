@@ -26,7 +26,9 @@ public class UndirectedGraph<T> implements Graph<T> {
 
     @Override
     public void addVertex(T vertex) {
-        vertexes.add(vertex);
+        if (!vertexes.contains(vertex)) {
+            vertexes.add(vertex);
+        }
     }
 
     @Override
