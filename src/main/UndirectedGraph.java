@@ -19,8 +19,10 @@ public class UndirectedGraph<T> implements Graph<T> {
 
     @Override
     public void addEdge(Edge<T> edge) {
-        if (!hasEdge(edge)) {
-            edges.add(edge);
+        if (!hasEdge(edge) &&
+            (vertexes.contains(edge.getVertex1()) ||
+             vertexes.contains(edge.getVertex2()))) {
+                edges.add(edge);
         }
     }
 
@@ -68,10 +70,10 @@ public class UndirectedGraph<T> implements Graph<T> {
     @Override
     public List<Edge<T>> getAdjList(T vertex) {
         final List<Edge<T>> adj = new ArrayList<>();
-        edges.forEach(edge -> {
+        for (Edge<T> edge : edges) {
             if (edge.getVertex1().equals(vertex) || edge.getVertex2().equals(vertex))
                 adj.add(edge);
-        });
+        }
         return adj;
     }
 
