@@ -69,23 +69,34 @@ public class GraphGenerator<T> {
         return edges;
     }
 
-    public static Graph<Character> exampleA() {
-        final Graph<Character> example = new UndirectedGraph<>(7);
-        example.addVertex('A');
-        example.addVertex('B');
-        example.addVertex('C');
-        example.addVertex('D');
-        example.addVertex('E');
-        example.addVertex('F');
-        example.addVertex('G');
-        example.addEdge(new Edge<Character>('A', 'B'));
-        example.addEdge(new Edge<Character>('A', 'D'));
-        example.addEdge(new Edge<Character>('B', 'E'));
-        example.addEdge(new Edge<Character>('C', 'D'));
-        example.addEdge(new Edge<Character>('D', 'F'));
-        example.addEdge(new Edge<Character>('D', 'G'));
-        example.addEdge(new Edge<Character>('E', 'F'));
-        example.addEdge(new Edge<Character>('E', 'G'));
+    public static Graph<Integer> exampleA() {
+        final Graph<Integer> example = new UndirectedGraph<>(7);
+        example.addVertex(0);
+        example.addVertex(1);
+        example.addVertex(2);
+        example.addVertex(3);
+        example.addVertex(4);
+        example.addVertex(5);
+        example.addVertex(6);
+        example.addEdge(new Edge<>(0, 1));
+        example.addEdge(new Edge<>(0, 2));
+        example.addEdge(new Edge<>(1, 3));
+        example.addEdge(new Edge<>(1, 4));
+        example.addEdge(new Edge<>(2, 5));
+        example.addEdge(new Edge<>(2, 6));
+        return example;
+    }
+
+    public static Graph<Integer> exampleB() {
+        final Graph<Integer> example = new UndirectedGraph<>(7);
+        example.addVertex(0);
+        example.addVertex(1);
+        example.addVertex(2);
+        example.addVertex(3);
+        example.addEdge(new Edge<>(0, 1));
+        example.addEdge(new Edge<>(0, 2));
+        example.addEdge(new Edge<>(1, 2));
+        example.addEdge(new Edge<>(2, 3));
         return example;
     }
 }

@@ -22,7 +22,7 @@ public class UndirectedGraph<T> implements Graph<T> {
         if (!hasEdge(edge) &&
             (vertexes.contains(edge.getVertex1()) ||
              vertexes.contains(edge.getVertex2()))) {
-                edges.add(edge);
+             edges.add(edge);
         }
     }
 
