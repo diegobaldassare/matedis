@@ -55,7 +55,7 @@ public class UndirectedGraph<T> implements Graph<T> {
 
     @Override
     public T getVertex(int index) {
-        return vertexes.get(index);
+         return vertexes.get(index);
     }
 
     @Override
