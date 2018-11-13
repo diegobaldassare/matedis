@@ -24,12 +24,20 @@ public class Edge<T> {
         return vertex2;
     }
 
+    /**
+     * Defines that two edges are equal if they contain the same two vertex,
+     * no matter in which order.
+     * i.e. (1, 0) is equal to (0, 1)
+     * @param o the other edge to be compared with
+     * @return true if the other edge is equal to this, or false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Edge<?> edge = (Edge<?>) o;
-        return !(!vertex1.equals(edge.vertex1) || !vertex1.equals(edge.vertex2));
+        return (vertex1.equals(edge.vertex1) && vertex2.equals(edge.vertex2)) ||
+                (vertex1.equals(edge.vertex2) && vertex2.equals(edge.vertex1));
     }
 
     @Override
