@@ -21,6 +21,6 @@ public class Main {
         System.out.println("Flat Search path: " + graphApplication.flatSearch(randomGraph));
         System.out.println("Depth First Search path: " + graphApplication.dfs(randomGraph, 0));
         System.out.println("Breadth Search path: " + graphApplication.bfs(randomGraph, 0));
-        System.out.println("Fleury: "); graphApplication.fleury(exampleB, 2);
+        System.out.println("Fleury: "); graphApplication.fleury(exampleB);
     }
 }

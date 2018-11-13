@@ -94,6 +94,11 @@ public class GraphApplication<T> {
         return path;
     }
 
+    public void fleury(Graph<Integer> graph) {
+        int start = getOddVertex(graph);
+        fleury(graph, start);
+    }
+
     public void fleury(Graph<Integer> graph, int start) {
 
         // Recur for all the vertices adjacent to this vertex
@@ -150,5 +155,25 @@ public class GraphApplication<T> {
             }
         }
         return count;
+    }
+
+    /**
+     * @throws IllegalArgumentException if graph do not have 2 odd vertex.
+     * @param graph to be analyzed
+     * @return the first odd vertex from the graph.
+     */
+    private Integer getOddVertex(Graph<Integer> graph) {
+        Integer result = null;
+        int odds = 0;
+        //flat search
+        for (int i = 0; i < graph.order(); i++) {
+            //check if the order of the vertex is odd
+            if (graph.getAdjacentEdges(graph.getVertex(i)).size() % 2 != 0) {
+                if (result == null) result = graph.getVertex(i);
+                odds++;
+            }
+        }
+        if (odds == 2) return result;
+        throw new IllegalArgumentException("Graph do not have 2 odd vertex.");
     }
 }

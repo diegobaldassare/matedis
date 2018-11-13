@@ -32,6 +32,6 @@ public class GraphApplicationTest {
     void fleuryTest() {
         Graph<Integer> graph = GraphGenerator.exampleB();
         GraphApplication graphApplication = new GraphApplication();
-        graphApplication.fleury(graph, 2);
+        graphApplication.fleury(graph);
     }
 }
