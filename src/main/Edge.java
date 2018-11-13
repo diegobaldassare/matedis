@@ -3,8 +3,8 @@ package main;
 import java.util.Objects;
 
 /**
- * Author: brianfroschauer
- * Date: 30/10/2018
+ * Author: Froschauer Brian, Baldassare diego, De Luca Bruno
+ * Date: 11/08/2018
  */
 public class Edge<T> {
 

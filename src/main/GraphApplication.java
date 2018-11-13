@@ -3,8 +3,8 @@ package main;
 import java.util.*;
 
 /**
- * Author: brianfroschauer
- * Date: 06/11/2018
+ * Author: Froschauer Brian, Baldassare diego, De Luca Bruno
+ * Date: 11/08/2018
  */
 public class GraphApplication<T extends Comparable> {
 

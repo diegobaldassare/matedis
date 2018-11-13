@@ -4,6 +4,10 @@ import main.Edge;
 import main.UndirectedGraph;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Author: Froschauer Brian, Baldassare diego, De Luca Bruno
+ * Date: 11/08/2018
+ */
 class UndirectedGraphTest {
 
     @Test

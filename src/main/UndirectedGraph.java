@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Author: brianfroschauer
+ * Author: Froschauer Brian, Baldassare diego, De Luca Bruno
  * Date: 11/08/2018
  */
 public class UndirectedGraph<T> implements Graph<T> {

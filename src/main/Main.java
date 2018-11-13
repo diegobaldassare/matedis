@@ -3,7 +3,8 @@ package main;
 import static main.GraphApplication.randomGraph;
 
 /**
- * Created by Diego Baldassare on 2018-11-11.
+ * Author: Froschauer Brian, Baldassare diego, De Luca Bruno
+ * Date: 11/08/2018
  */
 public class Main {
 
