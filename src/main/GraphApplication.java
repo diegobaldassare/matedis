@@ -1,7 +1,5 @@
 package main;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.*;
 
 /**
@@ -70,7 +68,7 @@ public class GraphApplication<T extends Comparable> {
         return edges;
     }
 
-    public List<T> flatSearch(@NotNull Graph<T> graph) {
+    public List<T> flatSearch(Graph<T> graph) {
         final List<T> path = new ArrayList<>();
         for (int i = 0; i < graph.order(); i++) {
             //Procesar = imprimir recorrido
@@ -102,7 +100,7 @@ public class GraphApplication<T extends Comparable> {
             // Get all adjacent vertices of the dequeued vertex
             // If a adjacent has not been visited, then mark it
             // visited and enqueue it
-            for (Edge<Integer> edge : graph.getAdjList(vertex)) {
+            for (Edge<Integer> edge : graph.getAdjacentEdges(vertex)) {
                 final int v1 = edge.getVertex1();
                 if (!visited[v1]) {
                     visited[v1] = true;
@@ -126,7 +124,7 @@ public class GraphApplication<T extends Comparable> {
         path.add(vertex);
         // Recur for all the vertices adjacent to this vertex
 
-        List<Edge<Integer>> adjList = graph.getAdjList(vertex);
+        List<Edge<Integer>> adjList = graph.getAdjacentEdges(vertex);
 
         for (Edge<Integer> edge : adjList) {
             final int v1 = edge.getVertex1();
@@ -149,4 +147,65 @@ public class GraphApplication<T extends Comparable> {
         }
         return new ArrayList<>();
     }
+
+    /**
+     * @author Alicia Gioia
+     * @param graph from which the algorithm is calculated.
+     * @param start position of the vertex from which the algorithm starts.
+     */
+    public List<T> dfs(Graph<T> graph, int start) {
+        final List<T> path = new ArrayList<>();
+        T t;
+        final boolean[] visited = new boolean[graph.order()];
+        final Stack<T> stack = new Stack<>();
+        List<T> lst;
+        stack.push(graph.getVertex(start));
+        visited[start] = true;
+        while (!stack.isEmpty()){
+            t = stack.peek();
+            stack.pop();
+            path.add(t);
+            lst = graph.getAdjacentList(t);
+            if(lst.size() != 0 ) {
+                for (int i = 0; i < lst.size(); i++){
+                    if(!visited[i]) {
+                        visited[i] = true;
+                        stack.push(lst.get(i));
+                    }
+                }
+            }
+        }
+        return path;
+    }
+
+    /**
+     * @author Alicia Gioia
+     * @param graph from which the algorithm is calculated.
+     * @param start position of the vertex from which the algorithm starts.
+     */
+    public List<T> bfs(Graph<T> graph, int start) {
+        final List<T> path = new ArrayList<>();
+        T fr;
+        boolean[] visited = new boolean[graph.order()];
+        Queue<T> queue = new LinkedList<>();
+        List<T> lst;
+        queue.offer(graph.getVertex(start));
+        visited[start] = true;
+        while (!queue.isEmpty()){
+            fr = queue.peek();
+            queue.remove();
+            path.add(fr);
+            lst = graph.getAdjacentList(fr);
+            if(lst.size() != 0 ) {
+                for (int i = 0; i < lst.size(); i++) {
+                    if(!visited[i]) {
+                            visited[i] = true;
+                            queue.offer(lst.get(i));
+                    }
+                }
+            }
+        }
+        return path;
+    }
+
 }

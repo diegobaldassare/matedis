@@ -1,7 +1,5 @@
 package main;
 
-import java.util.List;
-
 import static main.GraphApplication.randomGraph;
 
 /**
@@ -14,11 +12,14 @@ public class Main {
         // create random graph
         Graph<Integer> graph = randomGraph();
         graph.print();
+        System.out.println();
 
         GraphApplication<Integer> graphApplication = new GraphApplication<>();
 
         System.out.println("Flat Search path: " + graphApplication.flatSearch(graph));
         System.out.println("Depth First Search path: " + GraphApplication.BFS(graph));
         System.out.println("Breadth Search path: " + GraphApplication.DFS(graph));
+        System.out.println("Depth First Search path (Alicia): " + graphApplication.dfs(graph, 0));
+        System.out.println("Breadth Search path (Alicia): " + graphApplication.bfs(graph, 0));
     }
 }
