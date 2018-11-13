@@ -71,24 +71,62 @@ public class GraphApplication<T extends Comparable> {
     public List<T> flatSearch(Graph<T> graph) {
         final List<T> path = new ArrayList<>();
         for (int i = 0; i < graph.order(); i++) {
-            //Procesar = imprimir recorrido
-            path.add(graph.getVertex(i));
+            path.add(graph.getVertex(i)); // procesar = imprimir recorrido
         }
         return path;
     }
 
-    public static List<Integer> BFS(Graph<Integer> graph) {
+    public List<Integer> dfs(Graph<Integer> graph, int start) {
         // Mark all the vertices as not visited (By default set as false)
         final List<Integer> path = new ArrayList<>();
         boolean visited[] = new boolean[graph.order()];
 
         // Create a queue for BFS
-        LinkedList<Integer> queue = new LinkedList<>();
+        Stack<Integer> stack = new Stack<>();
 
         // Mark the current node as visited and enqueue it
         if (graph.order() != 0) {
-            visited[graph.getVertex(0)] = true;
-            queue.add(graph.getVertex(0));
+            visited[graph.getVertex(start)] = true;
+            stack.add(graph.getVertex(start));
+        }
+
+        while (stack.size() != 0) {
+
+            // Dequeue a vertex from queue and print it
+            Integer vertex = stack.pop();
+            path.add(vertex);
+
+            // Get all adjacent vertices of the dequeued vertex
+            // If a adjacent has not been visited, then mark it visited and enqueue it
+            for (Edge<Integer> edge : graph.getAdjacentEdges(vertex)) {
+                final int v1 = edge.getVertex1();
+                if (!visited[v1]) {
+                    visited[v1] = true;
+                    stack.add(v1);
+                }
+
+                final int v2 = edge.getVertex2();
+                if (!visited[v2]) {
+                    visited[v2] = true;
+                    stack.add(v2);
+                }
+            }
+        }
+        return path;
+    }
+
+    public List<Integer> bfs(Graph<Integer> graph, int start) {
+        // Mark all the vertices as not visited
+        final List<Integer> path = new ArrayList<>();
+        boolean visited[] = new boolean[graph.order()];
+
+        // Create a queue for BFS
+        final LinkedList<Integer> queue = new LinkedList<>();
+
+        // Mark the current node as visited and enqueue it (if graph has vertex)
+        if (graph.order() != 0) {
+            visited[graph.getVertex(start)] = true;
+            queue.add(graph.getVertex(start));
         }
 
         while (queue.size() != 0) {
@@ -98,8 +136,7 @@ public class GraphApplication<T extends Comparable> {
             path.add(vertex);
 
             // Get all adjacent vertices of the dequeued vertex
-            // If a adjacent has not been visited, then mark it
-            // visited and enqueue it
+            // If a adjacent has not been visited, then mark it visited and enqueue it
             for (Edge<Integer> edge : graph.getAdjacentEdges(vertex)) {
                 final int v1 = edge.getVertex1();
                 if (!visited[v1]) {
@@ -116,96 +153,4 @@ public class GraphApplication<T extends Comparable> {
         }
         return path;
     }
-
-    private static List<Integer> DFSUtil(int vertex, boolean[] visited, Graph<Integer> graph, List<Integer> path) {
-
-        // Mark the current node as visited and print it
-        visited[vertex] = true;
-        path.add(vertex);
-        // Recur for all the vertices adjacent to this vertex
-
-        List<Edge<Integer>> adjList = graph.getAdjacentEdges(vertex);
-
-        for (Edge<Integer> edge : adjList) {
-            final int v1 = edge.getVertex1();
-            if (!visited[v1]) DFSUtil(v1, visited, graph, path);
-
-            final int v2 = edge.getVertex2();
-            if (!visited[v2]) DFSUtil(v2, visited, graph, path);
-        }
-        return path;
-    }
-
-    public static List<Integer> DFS(Graph<Integer> graph) {
-        // Mark all the vertices as not visited(set as false by default in java)
-        if (graph.order() != 0) {
-            final List<Integer> path = new ArrayList<>();
-            final Integer vertex = graph.getVertex(0);
-            boolean visited[] = new boolean[graph.order()];
-            // Call the recursive helper function to print DFS
-            return DFSUtil(vertex, visited, graph, path);
-        }
-        return new ArrayList<>();
-    }
-
-    /**
-     * @author Alicia Gioia
-     * @param graph from which the algorithm is calculated.
-     * @param start position of the vertex from which the algorithm starts.
-     */
-    public List<T> dfs(Graph<T> graph, int start) {
-        final List<T> path = new ArrayList<>();
-        T t;
-        final boolean[] visited = new boolean[graph.order()];
-        final Stack<T> stack = new Stack<>();
-        List<T> lst;
-        stack.push(graph.getVertex(start));
-        visited[start] = true;
-        while (!stack.isEmpty()){
-            t = stack.peek();
-            stack.pop();
-            path.add(t);
-            lst = graph.getAdjacentList(t);
-            if(lst.size() != 0 ) {
-                for (int i = 0; i < lst.size(); i++){
-                    if(!visited[i]) {
-                        visited[i] = true;
-                        stack.push(lst.get(i));
-                    }
-                }
-            }
-        }
-        return path;
-    }
-
-    /**
-     * @author Alicia Gioia
-     * @param graph from which the algorithm is calculated.
-     * @param start position of the vertex from which the algorithm starts.
-     */
-    public List<T> bfs(Graph<T> graph, int start) {
-        final List<T> path = new ArrayList<>();
-        T fr;
-        boolean[] visited = new boolean[graph.order()];
-        Queue<T> queue = new LinkedList<>();
-        List<T> lst;
-        queue.offer(graph.getVertex(start));
-        visited[start] = true;
-        while (!queue.isEmpty()){
-            fr = queue.peek();
-            queue.remove();
-            path.add(fr);
-            lst = graph.getAdjacentList(fr);
-            if(lst.size() != 0 ) {
-                for (int i = 0; i < lst.size(); i++) {
-                    if(!visited[i]) {
-                            visited[i] = true;
-                            queue.offer(lst.get(i));
-                    }
-                }
-            }
-        }
-        return path;
-    }
-
 }

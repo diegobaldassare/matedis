@@ -71,7 +71,7 @@ public class UndirectedGraph<T> implements Graph<T> {
     public List<T> getAdjacentList(T vertex) {
         final List<T> result = new ArrayList<>();
         for (Edge<T> edge : edges) {
-            if (edge.getVertex1().equals(vertex)) result.add(edge.getVertex2());
+            if      (edge.getVertex1().equals(vertex)) result.add(edge.getVertex2());
             else if (edge.getVertex2().equals(vertex)) result.add(edge.getVertex1());
         }
         return result;
