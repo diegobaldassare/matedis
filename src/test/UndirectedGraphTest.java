@@ -246,5 +246,4 @@ class UndirectedGraphTest {
 
         assert graph.order() == 6;
     }
-
 }
