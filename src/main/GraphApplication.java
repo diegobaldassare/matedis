@@ -1,17 +1,20 @@
 package main;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.*;
 
 /**
  * Author: brianfroschauer
  * Date: 06/11/2018
  */
-public class GraphApplication<T> {
+public class GraphApplication<T extends Comparable> {
 
     /**
      * Permite cargar datos (lista de vertices y de aristas) de tipo T a un grafo
-     * @param graph al que se agregan los datos
-     * @param edges a agregar al grafo
+     *
+     * @param graph  al que se agregan los datos
+     * @param edges  a agregar al grafo
      * @param vertex a agregar al grafo
      */
     public void chargeData(Graph<T> graph, List<Edge<T>> edges, List<T> vertex) {
@@ -21,6 +24,7 @@ public class GraphApplication<T> {
 
     /**
      * Crea un grafo de manera aleatoria
+     *
      * @return un grafo aleatorio
      */
     public static Graph<Integer> randomGraph() {
@@ -36,6 +40,7 @@ public class GraphApplication<T> {
 
     /**
      * Permite crear una lista de vertices de tipo integer de forma aleatoria.
+     *
      * @param amount de vertices
      * @return una lista de vertices
      */
@@ -49,6 +54,7 @@ public class GraphApplication<T> {
 
     /**
      * Permite conectar (crear aristas) dado una lista de vértices.
+     *
      * @param vertexes a conectar
      * @return una lista de vértices de tipo integer
      */
@@ -56,12 +62,21 @@ public class GraphApplication<T> {
         final List<Edge<Integer>> edges = new ArrayList<>();
 
         for (int i = 0; i < vertexes.size(); i++) {
-            for (int j = i + 1; j < vertexes.size()-1; j++) {
+            for (int j = i + 1; j < vertexes.size() - 1; j++) {
                 final int probability = new Random().nextInt(2);
                 if (probability == 0) edges.add(new Edge<>(vertexes.get(i), vertexes.get(j)));
             }
         }
         return edges;
+    }
+
+    public List<T> flatSearch(@NotNull Graph<T> graph) {
+        final List<T> path = new ArrayList<>();
+        for (int i = 0; i < graph.order(); i++) {
+            //Procesar = imprimir recorrido
+            path.add(graph.getVertex(i));
+        }
+        return path;
     }
 
     public static List<Integer> BFS(Graph<Integer> graph) {
@@ -104,23 +119,23 @@ public class GraphApplication<T> {
         return path;
     }
 
-   private static List<Integer> DFSUtil(int vertex, boolean[] visited, Graph<Integer> graph, List<Integer> path) {
+    private static List<Integer> DFSUtil(int vertex, boolean[] visited, Graph<Integer> graph, List<Integer> path) {
 
         // Mark the current node as visited and print it
         visited[vertex] = true;
         path.add(vertex);
         // Recur for all the vertices adjacent to this vertex
 
-       List<Edge<Integer>> adjList = graph.getAdjList(vertex);
+        List<Edge<Integer>> adjList = graph.getAdjList(vertex);
 
-       for (Edge<Integer> edge : adjList) {
-           final int v1 = edge.getVertex1();
-           if (!visited[v1]) DFSUtil(v1, visited, graph, path);
+        for (Edge<Integer> edge : adjList) {
+            final int v1 = edge.getVertex1();
+            if (!visited[v1]) DFSUtil(v1, visited, graph, path);
 
-           final int v2 = edge.getVertex2();
-           if (!visited[v2]) DFSUtil(v2, visited, graph, path);
-       }
-       return path;
+            final int v2 = edge.getVertex2();
+            if (!visited[v2]) DFSUtil(v2, visited, graph, path);
+        }
+        return path;
     }
 
     public static List<Integer> DFS(Graph<Integer> graph) {
@@ -133,22 +148,5 @@ public class GraphApplication<T> {
             return DFSUtil(vertex, visited, graph, path);
         }
         return new ArrayList<>();
-    }
-
-    public static void main(String[] args) {
-        // create random graph
-        Graph<Integer> graph = randomGraph();
-        graph.print();
-
-        System.out.println();
-
-        // Print BFS
-        List<Integer> bfs = BFS(graph);
-        System.out.println("BFS Path: " + bfs);
-
-        // Print DFS
-        List<Integer> dfs = DFS(graph);
-        System.out.println("DFS Path: " + dfs);
-
     }
 }
