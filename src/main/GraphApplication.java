@@ -6,7 +6,7 @@ import java.util.*;
  * Author: brianfroschauer
  * Date: 06/11/2018
  */
-public class GraphApplication<T extends Comparable> {
+public class GraphApplication<T> {
 
     /**
      * Permite cargar datos (lista de vertices y de aristas) de tipo T a un grafo
@@ -187,7 +187,7 @@ public class GraphApplication<T extends Comparable> {
         final List<T> path = new ArrayList<>();
         T fr;
         boolean[] visited = new boolean[graph.order()];
-        Queue<T> queue = new LinkedList<>();
+        Queue<T> queue = new PriorityQueue<>();
         List<T> lst;
         queue.offer(graph.getVertex(start));
         visited[start] = true;
