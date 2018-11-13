@@ -24,7 +24,9 @@ public interface Graph<T> {
 
     int order();
 
-    List<Edge<T>> getAdjList(T vertex);
+    List<T> getAdjacentList(T vertex);
+
+    List<Edge<T>> getAdjacentEdges(T vertex);
 
     void print();
 }

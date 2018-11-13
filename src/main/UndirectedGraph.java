@@ -35,7 +35,7 @@ public class UndirectedGraph<T> implements Graph<T> {
 
     @Override
     public void removeVertex(T vertex) {
-        edges.removeAll(getAdjList(vertex));
+        edges.removeAll(getAdjacentEdges(vertex));
         vertexes.remove(vertex);
     }
 
@@ -68,7 +68,17 @@ public class UndirectedGraph<T> implements Graph<T> {
     }
 
     @Override
-    public List<Edge<T>> getAdjList(T vertex) {
+    public List<T> getAdjacentList(T vertex) {
+        final List<T> result = new ArrayList<>();
+        for (Edge<T> edge : edges) {
+            if (edge.getVertex1().equals(vertex)) result.add(edge.getVertex2());
+            else if (edge.getVertex2().equals(vertex)) result.add(edge.getVertex1());
+        }
+        return result;
+    }
+
+    @Override
+    public List<Edge<T>> getAdjacentEdges(T vertex) {
         final List<Edge<T>> adj = new ArrayList<>();
         for (Edge<T> edge : edges) {
             if (edge.getVertex1().equals(vertex) || edge.getVertex2().equals(vertex))
@@ -78,7 +88,7 @@ public class UndirectedGraph<T> implements Graph<T> {
     }
 
     public int getVertexDegree(T vertex) {
-        return getAdjList(vertex).size();
+        return getAdjacentEdges(vertex).size();
     }
 
     public void print() {
