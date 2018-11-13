@@ -1,7 +1,5 @@
 package main;
 
-import static main.GraphApplication.randomGraph;
-
 /**
  * Author: Froschauer Brian, Baldassare diego, De Luca Bruno
  * Date: 11/08/2018
@@ -11,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         // create random graph
-        Graph<Integer> graph = randomGraph();
+        Graph<Integer> graph = GraphGenerator.randomGraph();
         graph.print();
         System.out.println();
 
